@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Late Evening Craving</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f4f4f9, #e0e0e5);
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        h1 {
+            color: #003366;
+            font-size: 2.6em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 40px;
+            font-size: 2em;
+            background: #003366;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d9534f;
+        }
+        .story-section {
+            text-align: left;
+        }
+        .story-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .story-section li {
+            font-size: 1.1em;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+	footer {
+    text-align: center;
+    padding: 15px;
+    background: #003366;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 30px;
+    border-top: 5px solid #007bff;
+	}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Late Evening Craving 🍕📦</h1>
+        <p class="story-section">It was a long day, and I was exhausted. The evening had just set in, and I thought a warm, delicious meal would be the perfect way to unwind.there fore i went to miss and saw boring mix veg which ruined my mind so i thought of ordering food online.But there was a problem—<span class="highlight">I had no idea which app would deliver my food the fastest.</span> I had been burned before—waiting for what felt like an eternity for my food to arrive, only to receive it cold and disappointing. This time, I wanted to be smart about it so i collected some data of past order from my phone and my freinds phone and done analysis on it.</p>
+        
+        <h2> Which App is the Fastest? 🚀</h2>
+        <p class="story-section">Looking at the average delivery times, I found that:</p>
+        <ul class="story-section">
+            <li>✅ Domino’s: Fastest (~36 minutes).</li>
+            <li>⚡ Swiggy: Decent (~42 minutes).</li>
+            <li>🐢 Zomato: Slowest (~51 minutes).</li>
+        </ul>
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 1.png" alt="frequency of time it took to deliver which is showing normal distribution">
+
+        </div>
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 3.png" alt="distributio of data">
+	
+        </div>
+	<div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 6.png" alt="app speed comparison">
+        </div>
+	<p class="story-section">If I was starving and needed food fast, Domino’s was the way to go. But if I wanted more variety, Swiggy was still a decent option.</p>
+        <h2>Does Time of Day Matter? ⏳</h2>
+        <p class="story-section">Turns out, it does! Ordering in the evening meant the longest wait time may due to high demand:</p>
+        <ul class="story-section">
+            <li>🌇 Evening (49 min) → Worst time to order, peak rush!</li>
+            <li>⏳ Afternoon (39 min) → Quick deliveries, fewer orders.</li>
+            <li>☀️ Morning (44 min) → Slower, but manageable.</li>
+            <li>🌙 Night (41 min) → Better than evening but still slower.</li>
+        </ul>
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download.png" alt="Time of Day Impact">
+        </div>
+        
+        <h2>Distance & Its Impact 📏</h2>
+	<p class="story-section">I knew distance mattered, but how much? Looking at my analysis:
+</p>
+        <p class="story-section">Short distances (1-3 km) → Fast deliveries.<br>Long distances (5+ km) → Extra 15-20 minutes added.</p>
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 4.png" alt="Distance Impact">
+        </div>
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 2.png" alt="boxplot of the data">
+        </div>
+         
+        <h2>Predicting My Delivery Time 🤖</h2>
+
+	<p class="story-section">But then, a thought struck me—
+💡 What if I could predict the exact delivery time just by knowing the restaurant distance, the app, and the time of day?</p>
+        <p class="story-section">I decided to train multiple machine learning models to predict delivery time:</p>
+        <ul class="story-section">
+            <li>✅ Linear Regression - For a basic understanding.</li>
+            <li>🌲 Random Forest - To capture non-linear relationships.</li>
+            <li>🚀 Gradient Boosting (XGBoost) - To refine the predictions.</li>
+            <li>🧠 Polynomial Regression (Degree 3) - To model complex patterns.</li>
+            <li>🤖 Ensemble Model (Voting Regressor) - Combining all models for accuracy.</li>
+        </ul>
+	
+	<ul class="story-section">
+            <li>✅ mean absolute error - 2.8376205590704178.</li>
+            <li>📏 R1 score - 0.8524385950327058.</li>
+            
+        </ul>
+     
+        <div class="chart-container">
+            <img src="D:\certificate\projects\DAV homework\website\download 5.png" alt="ML Model Accuracy">
+        </div>
+        <h2>The Final Decision 🎯</h2>
+        <p class="story-section">Best App? <span class="highlight">Domino’s (fastest).</span><br>Best Strategy? <span class="highlight">Pick a restaurant within 3 km.</span><br>Best Time? <span class="highlight">Not now—but if I had ordered in the afternoon, I could have saved 10 minutes!</span></p>
+
+        <h2>The Result ✅</h2>
+        <p class="story-section">Domino’s delivered in 35 minutes—<span class="highlight">exactly as predicted.</span> Now, I don’t order blindly anymore. I predict my delivery time before ordering and choose the best option accordingly! 🚀</p>
+    </div>
+    <footer>
+    <p>Made with ❤️ by <strong>Shashank</strong></p>
+</footer>
+    <script>
+        ScrollReveal().reveal('h2, img, ul li, p', { delay: 200, distance: '20px', origin: 'bottom', duration: 800 });
+    </script>
+	
+
+</body>
+</html>
