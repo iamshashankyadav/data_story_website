@@ -16,7 +16,7 @@ The website allows users to submit their survey responses regarding the time tak
 ## Technologies Used
 
 - **HTML/CSS**: For building the structure and styling of the webpage.
-- **JavaScript**: For data visualization and interactive elements.
+- **Python/pandas/matplotlib/seaborn**: For data visualization and interactive elements.
 - **(Add any backend framework here if applicable, e.g., Flask, Django)**
 
 ## Live Demo
