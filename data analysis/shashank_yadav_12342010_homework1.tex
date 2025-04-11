@@ -1,0 +1,906 @@
+
+\documentclass[12pt]{article}
+% Import packages
+\usepackage{float}
+\usepackage{amsmath} % For mathematical equations
+\usepackage{amssymb} % For symbols
+\usepackage{graphicx} % For images
+\usepackage{hyperref} % For hyperlinks
+\usepackage{enumitem} % For list customization
+\usepackage{minted} % For syntax highlighting
+% Title page customization
+\title{Homework -1 }
+\author{DS 250 shashank yadav 12342010}
+
+\date{\today} % Automatically inserts today's date
+\begin{document}
+% Create the title page
+\maketitle
+\thispagestyle{empty} % Removes page number on the title page
+% Start the assignment content
+\href{https://colab.research.google.com/drive/1HwIdLMlzcBsNvkJgrYGyu2AyvWHZYkG6?usp=sharing}{click here for colab file for computer based quenstion}.
+\section{Theory Questions}
+Number of points for the question is indicated in square brackets.
+\subsection*{Answer 1 [10] }
+the samples are from with equal probabilities \( 1 \) to \( 1000 \) and extract the first digit \( x \). 
+
+
+- For \( x = 1 \): Numbers are \( 1, 10, \dots, 199, 1000 \). Count: \( 11 +100 + 1 = 112 \).
+- For \( x = 2, 3, \dots, 9 \): Each occurs \( 111 \) times.
+ probabilities will be:
+\[
+p_1 = \frac{112}{1000}, \quad p_2 = p_3 = \dots = p_9 = \frac{111}{1000}.
+\]
+
+
+The mean will be:
+\[
+\text{Mean} = \sum_{i=1}^9 x_i \cdot p_i = (1 \cdot \frac{112}{1000}) + (2 \cdot \frac{111}{1000}) + \dots + (9 \cdot \frac{111}{1000}).
+\]
+Simplify:
+\[
+\text{Mean}  = \frac{4996}{1000} = 4.996.
+\]
+
+
+The variance is:
+\[
+\text{Variance} = \sum_{i=1}^9 p_i \cdot (x_i - \text{Mean})^2.
+\]
+Compute:
+\[
+\text{Variance} = \frac{112}{1000}(12.25) + \frac{111}{1000}(6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25 + 12.25).
+\]
+Simplify:
+\[
+\text{Variance} \approx  6.675984.
+\]
+
+
+\subsection*{answer 2 [10]}
+
+The convolution of two Gaussian distributions \( N(0, \sigma_1^2) \) and \( N(0, \sigma_2^2) \) results in another Gaussian:
+\[
+N(0, \sigma_1^2) * N(0, \sigma_2^2) = N(0, \sigma_1^2 + \sigma_2^2).
+\]
+Thus, the new vairiance will be:
+\[
+\text{Variance} = \sigma_1^2 + \sigma_2^2.
+\]
+
+
+Similarly When convolving \( n \) identical Gaussian distributions \( N(0, \sigma^2) \), the total variance is the sum of the variances of each distribution:
+\[
+\text{Variance} = n \cdot \sigma^2.
+\]
+
+
+\subsection*{Answer 3 [10]}
+let us consider two random variables \( X \) and \( Y \) representing the outcomes of rolling two six-sided dice. The PMF for each die is:
+
+\[
+p_X(x) =
+\begin{cases}
+\frac{1}{6}, & \text{if } x \in \{1, 2, 3, 4, 5, 6\}, \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+We need to prove the probability distribution PZ (z) for the sum of two independent
+random variables X and Y is given by the convolution of their individual
+distributions.\\
+The PMF \( P_Z(z) \) for \( Z = X + Y \), the sum of the dice, is obtained by computing the convolution \( (p_X * p_Y)(z) \). Let us calculate \( P_Z(z) \) for specific values of \( z \):
+
+\begin{itemize}
+    \item For \( z = 2 \):
+    \[
+    P_Z(2) = \sum_{x} p_X(x) \cdot p_Y(2 - x).
+    \]
+    Here, the only valid pair is \( (x = 1, y = 1) \). Thus:
+    \[
+    P_Z(2) = p_X(1) \cdot p_Y(1) = \frac{1}{6} \cdot \frac{1}{6} = \frac{1}{36}.
+    \]
+
+    \item For \( z = 3 \):
+    \[
+    P_Z(3) = \sum_{x} p_X(x) \cdot p_Y(3 - x).
+    \]
+    The valid pairs are \( (x = 1, y = 2) \) and \( (x = 2, y = 1) \). Thus:
+    \[
+    P_Z(3) = p_X(1) \cdot p_Y(2) + p_X(2) \cdot p_Y(1) = \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} = \frac{2}{36}.
+    \]
+
+    \item For \( z = 4 \):
+    \[
+    P_Z(4) = \sum_{x} p_X(x) \cdot p_Y(4 - x).
+    \]
+    The valid pairs are \( (x = 1, y = 3), (x = 2, y = 2), (x = 3, y = 1) \). Thus:
+    \[
+    P_Z(4) = p_X(1) \cdot p_Y(3) + p_X(2) \cdot p_Y(2) + p_X(3) \cdot p_Y(1) = \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} = \frac{3}{36}.
+    \]
+\end{itemize}
+
+Thus, for \( z \in \{2, 3, \dots, 12\} \), we obtain the full distribution:
+
+\[
+P_Z(z) =
+\begin{cases}
+\frac{1}{36}, & \text{if } z = 2 \text{ or } 12, \\
+\frac{2}{36}, & \text{if } z = 3 \text{ or } 11, \\
+\frac{3}{36}, & \text{if } z = 4 \text{ or } 10, \\
+\frac{4}{36}, & \text{if } z = 5 \text{ or } 9, \\
+\frac{5}{36}, & \text{if } z = 6 \text{ or } 8, \\
+\frac{6}{36}, & \text{if } z = 7.
+\end{cases}
+\]
+
+Thus, the probability distribution \( P_Z(z) \) for the sum of two independent random variables \( X \) and \( Y \) is given by the convolution of their individual distributions.
+
+\subsection*{Answer 4 [10]}
+we want to prove the following identity for random samples \( 0 < x_1 < x_2 < \cdots < x_n \), with probabilities \( p_1, p_2, \dots, p_n \):
+\[
+\text{mean} = E[x] = \sum_{i=1}^{n} p_i x_i = \int_0^\infty \left( \text{Probability that } X > t \right) \, dt.
+\]
+
+Let's start by evaluating the integral on the right-hand side:
+\[
+\int_0^\infty P(X > t) \, dt.
+\]
+
+To calculate this, we'll split the integral into several parts:
+\[
+\int_0^\infty P(X > t) \, dt = \int_0^{x_1} P(X > t) \, dt + \int_{x_1}^{x_2} P(X > t) \, dt + \cdots + \int_{x_{n-1}}^{x_n} P(X > t) \, dt + \int_{x_n}^\infty P(X > t) \, dt.
+\]
+
+\textbf{Evaluating \( P(X > t) \):}
+
+For each interval, \( P(X > t) \) takes on constant values:
+\begin{itemize}
+    \item For \( t \in [0, x_1] \): All values exceed \( t \), so \( P(X > t) = 1 \).
+    \item For \( t \in [x_1, x_2] \): \( P(X > t) = \sum_{i=2}^n p_i \), which is the probability of values greater than \( x_1 \).
+    \item For \( t \in [x_2, x_3] \): \( P(X > t) = \sum_{i=3}^n p_i \).
+    \item And so on, until:
+    \item For \( t \in [x_n, \infty] \): \( P(X > t) = 0 \), as no values exceed \( x_n \).
+\end{itemize}
+
+\textbf{Computing the Integral:}
+
+Now, we can substitute these values into the integral:
+\[
+\int_0^\infty P(X > t) \, dt = \int_0^{x_1} 1 \, dt + \int_{x_1}^{x_2} \sum_{i=2}^n p_i \, dt + \cdots + \int_{x_{n-1}}^{x_n} p_n \, dt.
+\]
+
+Let's evaluate each of these terms:
+\[
+\int_0^{x_1} 1 \, dt = x_1,
+\]
+\[
+\int_{x_1}^{x_2} \sum_{i=2}^n p_i \, dt = (x_2 - x_1) \sum_{i=2}^n p_i,
+\]
+\[
+\int_{x_2}^{x_3} \sum_{i=3}^n p_i \, dt = (x_3 - x_2) \sum_{i=3}^n p_i,
+\]
+and so on, until:
+\[
+\int_{x_{n-1}}^{x_n} p_n \, dt = (x_n - x_{n-1}) p_n.
+\]
+
+Thus, the total integral becomes:
+\[
+\int_0^\infty P(X > t) \, dt = x_1 + (x_2 - x_1) \sum_{i=2}^n p_i + (x_3 - x_2) \sum_{i=3}^n p_i + \cdots + (x_n - x_{n-1}) p_n.
+\]
+
+Simplifying the expression:
+\[
+\int_0^\infty P(X > t) \, dt = p_1 x_1 + p_2 x_2 + p_3 x_3 + \cdots + p_n x_n = \sum_{i=1}^n p_i x_i.
+\]
+
+Additionally, we know that:
+\[
+E[X] = \sum_{i=1}^n p_i x_i.
+\]
+
+now, we have:
+\[
+E[X] = \int_0^\infty P(X > t) \, dt.
+\]
+
+Hence proved.
+
+\subsection*{MML 6.2, Answer 5 [10]}
+we are given the following Gaussian mixture distribution:
+\[
+0.4 \mathcal{N}\left( \begin{pmatrix} 10 \\ 2 \end{pmatrix}, \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \right) + 0.6 \mathcal{N}\left( \begin{pmatrix} 0 \\ 0 \end{pmatrix}, \begin{pmatrix} 8.4 & 2.0 \\ 2.0 & 1.7 \end{pmatrix} \right)
+\]
+Here, the first component has a mean vector \( \mu_1 = \begin{pmatrix} 10 \\ 2 \end{pmatrix} \) and covariance matrix \( \Sigma_1 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \), and the second component has a mean vector \( \mu_2 = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \) and covariance matrix \( \Sigma_2 = \begin{pmatrix} 8.4 & 2.0 \\ 2.0 & 1.7 \end{pmatrix} \). The weights for these components are 0.4 and 0.6, respectively.
+
+\section*{(a) Marginal Distributions for Each Dimension}
+
+To find the marginal distributions for each dimension, we integrate over the other dimensions of the joint distribution. 
+
+Let’s start with the first dimension \( X_1 \). The marginal distribution for \( X_1 \) is:
+\[
+X_1 \sim 0.4 \mathcal{N}(10, 1) + 0.6 \mathcal{N}(0, 8.4).
+\]
+Now, to find the mean and variance for \( X_1 \), we compute:
+\[
+\mu_{X_1} = 0.4 \times 10 + 0.6 \times 0 = 4,
+\]
+\[
+\sigma^2_{X_1} = 0.4 \times 1 + 0.6 \times 8.4 = 5.04.
+\]
+So, the marginal distribution for \( X_1 \) becomes:
+\[
+X_1 \sim \mathcal{N}(4, 5.04).
+\]
+
+For the second dimension \( X_2 \), we similarly compute:
+\[
+X_2 \sim 0.4 \mathcal{N}(2, 1) + 0.6 \mathcal{N}(0, 1.7).
+\]
+The mean and variance for \( X_2 \) are:
+\[
+\mu_{X_2} = 0.4 \times 2 + 0.6 \times 0 = 0.8,
+\]
+\[
+\sigma^2_{X_2} = 0.4 \times 1 + 0.6 \times 1.7 = 1.48.
+\]
+So, the marginal distribution for \( X_2 \) is:
+\[
+X_2 \sim \mathcal{N}(0.8, 1.48).
+\]
+
+\section*{(b) Mean, Mode, and Median for Each Marginal Distribution}
+
+Now, for each marginal distribution, we can easily determine the mean, mode, and median. For any Gaussian distribution, these three values are all the same.
+
+For the first dimension \( X_1 \):
+\[
+\mu_{X_1} = \text{mean} = \text{mode} = \text{median} = 4.
+\]
+Similarly, for the second dimension \( X_2 \):
+\[
+\mu_{X_2} = \text{mean} = \text{mode} = \text{median} = 0.8.
+\]
+
+\section*{(c) Mean and Mode for the Two-Dimensional Distribution}
+
+The two-dimensional distribution is a mixture of two 2D Gaussian distributions. To find the mean of the mixture distribution, we take the weighted sum of the means of the individual components:
+\[
+\mu = 0.4 \times \begin{pmatrix} 10 \\ 2 \end{pmatrix} + 0.6 \times \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} 4 \\ 0.8 \end{pmatrix}.
+\]
+For the mode of the mixture distribution, since the mixture is weighted and both components are Gaussian distributions, the mode will correspond to the mean of the component with the highest weight. Here, the second component has a higher weight (0.6 versus 0.4), so the mode will be the mean of the second component:
+\[
+\text{Mode} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+\]
+
+Thus, for the two-dimensional distribution:
+\[
+\text{Mean} = \begin{pmatrix} 4 \\ 0.8 \end{pmatrix}, \quad \text{Mode} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+\]
+\subsection*{MML 6.3, Answer 6 [10]}
+We begin by considering a Bernoulli likelihood function. Given \( x \in \{0, 1\} \), the likelihood for a Bernoulli distribution is expressed as:
+\[
+p(x | \mu) = \mu^x (1 - \mu)^{1 - x},
+\]
+where \( \mu \) represents the probability of success, and \( x \) represents the outcome.
+
+Next, for the Bernoulli likelihood, we use the conjugate prior for \( \mu \), which follows a Beta distribution. The Beta distribution is defined as:
+\[
+p(\mu) = \text{Beta}(\mu | \alpha, \beta) = \frac{\mu^{\alpha - 1} (1 - \mu)^{\beta - 1}}{B(\alpha, \beta)},
+\]
+where \( B(\alpha, \beta) \) is the Beta function. The parameters \( \alpha \) and \( \beta \) control the shape of the prior distribution.
+
+To find the posterior distribution \( p(\mu | x_1, \dots, x_N) \), we apply Bayes' theorem:
+\[
+p(\mu | x_1, \dots, x_N) \propto p(\mu) \prod_{i=1}^{N} p(x_i | \mu).
+\]
+
+Substituting the Bernoulli likelihood and the Beta prior into this equation:
+\[
+p(\mu | x_1, \dots, x_N) \propto \mu^{\alpha - 1} (1 - \mu)^{\beta - 1} \prod_{i=1}^{N} \mu^{x_i} (1 - \mu)^{1 - x_i}.
+\]
+
+Now, we combine terms and simplify the powers of \( \mu \) and \( 1 - \mu \) to get:
+\[
+p(\mu | x_1, \dots, x_N) \propto \mu^{\alpha + 2N - 1} (1 - \mu)^{\beta + N - \sum_{i=1}^N x_i - 1}.
+\]
+
+This expression for the posterior is already in the form of a Beta distribution. Therefore, we can express the posterior distribution as:
+\[
+p(\mu | x_1, \dots, x_N) = \text{Beta} \left( \mu \bigg| \alpha' = \alpha + 2N, \, \beta' = \beta + N - \sum_{i=1}^N x_i \right).
+\]
+
+Thus, the posterior distribution for \( \mu \) after observing the data \( x_1, \dots, x_N \) is:
+\[
+p(\mu | x_1, \dots, x_N) = \text{Beta} \left( \mu \bigg| \alpha + 2N, \, \beta + N - \sum_{i=1}^N x_i \right).
+\]
+
+This concludes the derivation of the posterior distribution.
+\subsection*{MML 6.4, Answer 7 [10]}
+Given, two bags first with 4 mangoes and 2 apples and second with 4 mangoes and apples. 
+\begin{itemize}
+    \ \( B_1 \): the probability that fruit is picked from Bag 1.\\
+    \ \( B_2 \): the probability that fruit is picked from Bag 2.\\
+    \ \( M \): the fruit picked is a mango.
+\end{itemize}
+
+
+according to the bayes' theorem states:
+\[
+P(B_2 \mid M) = \frac{P(M \mid B_2) P(B_2)}{P(M)}.
+\]
+if the baised coin shows head than bag1 will be choosen else bag2 there for\\
+   - The probability of picking Bag 1 is \( P(B_1) = 0.6 \).\\
+   - The probability of picking Bag 2 is \( P(B_2) = 0.4 \).
+\\
+   - In Bag 1, there are 4 mangoes and 2 apples, so:
+   \[
+   P(M \mid B_1) = \frac{4}{4 + 2} = \frac{4}{6} = \frac{2}{3}.
+   \]
+   - In Bag 2, there are 4 mangoes and 4 apples, so:
+   \[
+   P(M \mid B_2) = \frac{4}{4 + 4} = \frac{4}{8} = \frac{1}{2}.
+   \]
+
+   Using the law of total probability:
+   \[
+   P(M) = P(M \mid B_1) P(B_1) + P(M \mid B_2) P(B_2).
+   \]
+   \[
+   P(M) = \left(\frac{2}{3} \cdot 0.6\right) + \left(\frac{1}{2} \cdot 0.4\right),
+   \]
+   \[
+   P(M) = \frac{4}{10} + \frac{2}{10} = \frac{6}{10} = 0.6.
+   \]
+
+Now, applying Bayes' theorem:
+\[
+P(B_2 \mid M) = \frac{P(M \mid B_2) P(B_2)}{P(M)}.
+\]
+
+\[
+P(B_2 \mid M) = \frac{\left(\frac{1}{2}\right) \cdot 0.4}{0.6}.
+\]
+\[
+P(B_2 \mid M) = \frac{0.2}{0.6} = \frac{1}{3}.
+\]
+
+The probability that the mango was picked from Bag 2 is:
+\[
+\boxed{\frac{1}{3}}.
+\]
+
+\subsection*{MML 6.5, Answer 8 [30]}
+we are analyzing the given system of equations:
+\[
+x_{t+1} = A x_t + \omega, \quad \omega \sim \mathcal{N}(0, Q),
+\]
+\[
+y_t = C x_t + v, \quad v \sim \mathcal{N}(0, R),
+\]
+where \( \omega \) and \( v \) are independent Gaussian noise terms, and the prior distribution is \( p(x_0) = \mathcal{N}(\mu_0, \Sigma_0) \).
+
+\section*{(a) Joint Distribution of \( p(x_0, x_1, \dots, x_T) \)}
+
+To determine the joint distribution \( p(x_0, x_1, \dots, x_T) \), we use the chain rule of probability:
+\[
+p(x_0, x_1, \dots, x_T) = p(x_0) \prod_{t=0}^{T-1} p(x_{t+1} | x_t).
+\]
+
+- The initial state \( p(x_0) \) is given as \( \mathcal{N}(\mu_0, \Sigma_0) \).
+- The transition model \( x_{t+1} = A x_t + \omega \), where \( \omega \sim \mathcal{N}(0, Q) \), implies:
+\[
+p(x_{t+1} | x_t) = \mathcal{N}(A x_t, Q).
+\]
+
+Combining these, the joint distribution becomes:
+\[
+p(x_0, x_1, \dots, x_T) = \mathcal{N}(\mu_0, \Sigma_0) \prod_{t=0}^{T-1} \mathcal{N}(A x_t, Q).
+\]
+
+Since both the initial state and the transitions are Gaussian, the entire joint distribution is Gaussian.
+
+\section*{(b) Recursive Distributions}
+
+\subsection*{1. Prediction: \( p(x_{t+1} | y_1, \dots, y_T) \)}
+
+We know \( x_{t+1} = A x_t + \omega \), and \( x_t | y_1, \dots, y_T \sim \mathcal{N}(\mu_t, \Sigma_t) \). By applying the linear transformation property of Gaussian distributions, the conditional distribution of \( x_{t+1} \) is:
+\[
+p(x_{t+1} | y_1, \dots, y_T) = \mathcal{N}(A \mu_t, A \Sigma_t A^T + Q).
+\]
+
+\subsection*{2. Joint Distribution: \( p(x_{t+1}, y_{t+1} | y_1, \dots, y_T) \)}
+
+To find the joint distribution of \( x_{t+1} \) and \( y_{t+1} \), we use:
+\[
+p(x_{t+1}, y_{t+1} | y_1, \dots, y_T) = p(x_{t+1} | y_1, \dots, y_T) \cdot p(y_{t+1} | x_{t+1}).
+\]
+
+- From the previous step, \( p(x_{t+1} | y_1, \dots, y_T) = \mathcal{N}(A \mu_t, A \Sigma_t A^T + Q) \).
+- The observation model \( y_{t+1} = C x_{t+1} + v \), where \( v \sim \mathcal{N}(0, R) \), gives:
+\[
+p(y_{t+1} | x_{t+1}) = \mathcal{N}(y_{t+1} | C x_{t+1}, R).
+\]
+
+Therefore, the joint distribution is:
+\[
+p(x_{t+1}, y_{t+1} | y_1, \dots, y_T) = \mathcal{N}(A \mu_t, A \Sigma_t A^T + Q) \cdot \mathcal{N}(y_{t+1} | C x_{t+1}, R).
+\]
+
+\subsection*{3. Update: \( p(x_{t+1} | y_1, \dots, y_{t+1}) \)}
+
+After observing \( y_{t+1} = \hat{y} \), we update the posterior using a Kalman filter step. First, recall the joint distribution:
+\[
+p(x_{t+1}, y_{t+1} | y_1, \dots, y_T) = \mathcal{N}(A \mu_t, A \Sigma_t A^T + Q) \cdot \mathcal{N}(y_{t+1} | C x_{t+1}, R).
+\]
+
+The posterior \( p(x_{t+1} | y_1, \dots, y_{t+1}) \) is Gaussian:
+\[
+p(x_{t+1} | y_1, \dots, y_{t+1}) = \mathcal{N}(\mu_{t+1}, \Sigma_{t+1}),
+\]
+where:
+\[
+\mu_{t+1} = A \mu_t + K (\hat{y} - C A \mu_t),
+\]
+\[
+\Sigma_{t+1} = A \Sigma_t A^T + Q - K C (A \Sigma_t A^T + Q) K^T.
+\]
+
+Here, \( K \) is the Kalman gain, defined as:
+\[
+K = (A \Sigma_t A^T + Q) C^T \left( C (A \Sigma_t A^T + Q) C^T + R \right)^{-1}.
+\]
+\subsection*{MML 6.12, Answer 9 [40]}
+\section*{Part (a): Likelihood \( p(y|x) \)}
+
+The random variable \( y \) is defined as:
+\[
+y = A x + b + \omega,
+\]
+where \( \omega \sim \mathcal{N}(\omega | 0, Q) \) is independent Gaussian noise. Since \( \omega \) is independent, the conditional distribution \( p(y|x) \) is directly given by:
+\[
+p(y|x) = \mathcal{N}(y | A x + b, Q),
+\]
+where:
+\begin{itemize}
+    \item Mean: \( \mu_y = A x + b \),
+    \item Covariance: \( \Sigma_y = Q \).
+\end{itemize}
+
+\section*{Part (b): Marginal Distribution \( p(y) \)}
+
+To compute the marginal distribution \( p(y) \), we integrate out \( x \) from the joint distribution:
+\[
+p(y) = \int p(y|x) p(x) \, dx,
+\]
+where:
+\begin{itemize}
+    \item \( p(x) = \mathcal{N}(x | \mu_x, \Sigma_x) \),
+    \item \( p(y|x) = \mathcal{N}(y | A x + b, Q) \).
+\end{itemize}
+
+Since both \( p(x) \) and \( p(y|x) \) are Gaussian, \( p(y) \) is also Gaussian. The parameters of \( p(y) \) are computed as follows:
+
+\subsubsection*{1. Mean}
+\[
+\mu_y = E[y] = E[A x + b + \omega] = A E[x] + b + E[\omega] = A \mu_x + b.
+\]
+
+\subsubsection*{2. Covariance}
+\[
+\Sigma_y = E[(y - \mu_y)(y - \mu_y)^T].
+\]
+Using the independence of \( x \) and \( \omega \), we compute:
+\[
+\Sigma_y = A \Sigma_x A^T + Q.
+\]
+
+Thus, the marginal distribution is:
+\[
+p(y) = \mathcal{N}(y | A \mu_x + b, A \Sigma_x A^T + Q).
+\]
+
+\section*{Part (c): Measurement Mapping \( z = C y + v \)}
+
+The random variable \( z \) is defined as:
+\[
+z = C y + v,
+\]
+where \( v \sim \mathcal{N}(v | 0, R) \) is Gaussian noise.
+
+\subsection*{(i) Likelihood \( p(z|y) \)}
+The conditional distribution \( p(z|y) \) is:
+\[
+p(z|y) = \mathcal{N}(z | C y, R),
+\]
+where:
+\begin{itemize}
+    \item Mean: \( \mu_z = C y \),
+    \item Covariance: \( \Sigma_z = R \).
+\end{itemize}
+
+\subsection*{(ii) Marginal Distribution \( p(z) \)}
+The marginal distribution \( p(z) \) is computed by integrating out \( y \):
+\[
+p(z) = \int p(z|y) p(y) \, dy.
+\]
+Since both \( p(y) \) and \( p(z|y) \) are Gaussian, \( p(z) \) is also Gaussian. Its parameters are:
+
+\subsubsection*{1. Mean}
+\[
+\mu_z = C \mu_y = C (A \mu_x + b).
+\]
+
+\subsubsection*{2. Covariance}
+\[
+\Sigma_z = C \Sigma_y C^T + R,
+\]
+where \( \Sigma_y = A \Sigma_x A^T + Q \). Substituting:
+\[
+\Sigma_z = C (A \Sigma_x A^T + Q) C^T + R.
+\]
+
+Thus, the marginal distribution is:
+\[
+p(z) = \mathcal{N}(z | C (A \mu_x + b), C (A \Sigma_x A^T + Q) C^T + R).
+\]
+
+\section*{Part (d): Posterior Distribution \( p(x|y) \)}
+
+To compute the posterior \( p(x|y) \), we start with the joint Gaussian distribution of \( x \) and \( y \).
+
+\subsection*{(i) Joint Distribution \( p(x, y) \)}
+The random variables \( x \) and \( y \) are jointly Gaussian:
+\[
+\begin{pmatrix} 
+x \\ 
+y 
+\end{pmatrix}
+\sim \mathcal{N}
+\left(
+\begin{pmatrix}
+\mu_x \\
+\mu_y
+\end{pmatrix},
+\begin{pmatrix}
+\Sigma_x & \Sigma_{xy} \\
+\Sigma_{yx} & \Sigma_y
+\end{pmatrix}
+\right),
+\]
+where:
+\begin{itemize}
+    \item \( \Sigma_{xy} = \text{Cov}(x, y) = \text{Cov}(x, A x + b + \omega) = A \Sigma_x \),
+    \item \( \Sigma_{yx} = \Sigma_{xy}^T = \Sigma_x A^T \),
+    \item \( \Sigma_y = A \Sigma_x A^T + Q \).
+\end{itemize}
+
+\subsection*{(ii) Posterior \( p(x|y) \)}
+The posterior distribution \( p(x|y) \) is Gaussian:
+\[
+p(x|y) = \mathcal{N}(x | \mu_{x|y}, \Sigma_{x|y}),
+\]
+where:
+
+\subsubsection*{1. Mean}
+\[
+\mu_{x|y} = \mu_x + \Sigma_{xy} \Sigma_y^{-1} (\hat{y} - \mu_y).
+\]
+
+\subsubsection*{2. Covariance}
+\[
+\Sigma_{x|y} = \Sigma_x - \Sigma_{xy} \Sigma_y^{-1} \Sigma_{yx}.
+\]
+
+Substituting \( \Sigma_{xy} = A \Sigma_x \) and \( \Sigma_y = A \Sigma_x A^T + Q \), we can compute explicit expressions for \( \mu_{x|y} \) and \( \Sigma_{x|y} \).
+
+\section{Computer Based}
+\href{https://colab.research.google.com/drive/1HwIdLMlzcBsNvkJgrYGyu2AyvWHZYkG6?usp=sharing}{link if colab file}.
+\subsection*{Answer 10 [10]}
+\section*{Python Code Example}
+
+Here is the Python code:
+
+\begin{minted}[frame=lines, framesep=2mm, bgcolor=lightgray, linenos]{python}
+import numpy as np
+# Number of samples
+N = 1000000
+# Generate N random samples from a uniform distribution [0, 1]
+samples = np.random.uniform(0, 1, N)
+# Compute the average of the samples
+a_n = np.mean(samples)
+# Compute the standardized variable X
+X = (a_n - 0.5) / (2 * np.sqrt(N))
+# Display the results
+print(f"Average A_N: {a_n:}")
+print(f"Standardized Variable X: {X:}")
+\end{minted}
+
+\subsection*{Results:}
+The computed results are:
+\begin{itemize}
+    \item \textbf{Average \( A_N \)}: \(  0.5000637542892189  \)
+    \item \textbf{Standardized Variable \( X \)}: \( 1.658163155 \times 10^{-7} \)
+\end{itemize}
+
+\subsection*{Conclusions:}
+\begin{itemize}
+    \item The sample average \( A_N = 0.5000637542892189 \) for n=1000000 is significantly close to the acutal mean of the whole sample \( \frac{1}{2} \), differing only by approximately \( 0.066\% \).
+    \item The standardized variable \( X \) is extremely small (\( \approx 1.66 \times 10^{-7} \)), which is very close to zero and shows that our sample mean is well within the expected statistical fluctuations from the theoretical mean.
+    \item This result supports the \textbf{Law of Large Numbers}, as with \( N = 1,000,000 \) samples, we achieve a very close approximation to the theoretical expected value.
+\end{itemize}
+
+\subsection*{answer 11 [30]}
+\section*{penguins Dataset Overview}
+
+\subsection*{Species}
+\begin{itemize}
+    \item Adelie
+    \item Chinstrap
+    \item Gentoo
+\end{itemize}
+
+\subsection*{Island}
+Penguins were observed across three islands:
+\begin{itemize}
+    \item Torgersen
+    \item Biscoe
+    \item Dream
+\end{itemize}
+
+\subsection*{Physical Measurements}
+The dataset includes the following measurements:
+\begin{itemize}
+    \item \textbf{Bill Length (mm)}: Length of the penguin’s bill.
+    \item \textbf{Bill Depth (mm)}: Depth of the penguin’s bill.
+    \item \textbf{Flipper Length (mm)}: Length of the penguin’s flipper.
+    \item \textbf{Body Mass (g)}: Mass of the penguin.
+\end{itemize}
+
+\subsection*{Sex}
+Penguins are categorized as either Male or Female.
+\subsection*{python code to find the missing values }
+\begin{minted}[frame=lines, framesep=2mm, bgcolor=lightgray, linenos]{python}
+import pandas as pd
+penguins_df = pd.read_csv("/content/penguins.csv")
+
+# Display the first few rows of the dataset
+penguins_df.head()
+# Summary statistics
+summary_statistics = penguins_df.describe(include='all')
+
+# Data types and missing values
+data_types = penguins_df.dtypes
+missing_values = penguins_df.isnull().sum()
+
+summary_statistics, data_types, missing_values
+
+\end{minted}
+\section*{Data Quality}
+\begin{itemize}
+    \item The dataset contains 344 rows and 7 columns.
+    \item Some missing values are present:
+    \begin{itemize}
+        \item 2 rows have missing physical measurements.
+        \item 11 rows doesn't have information regarding thier sex .
+    \end{itemize}
+\end{itemize}
+
+\section*{Species Distribution}
+\begin{itemize}
+    \item Adelie penguins are most freq species in the data set appears 152 times.
+    \item Gentoo appears 124 time and Chinstrap are the least freq appears 68 times.
+\end{itemize}
+
+\section*{Measurement Ranges}
+\begin{itemize}
+    \item Bill Length: 33--60 mm
+    \item Bill Depth: 13--21 mm
+    \item Flipper Length: 170--230 mm
+    \item Body Mass: 2700--6300 g
+\end{itemize}
+
+\section*{Sexual Dimorphism}
+\begin{itemize}
+    \item Males are generally larger than females in all measurements in all species.
+   
+\end{itemize}
+\subsection*{python code for ploting distribution , pair plots and correlation between there numerical features }
+\begin{minted}[frame=lines, framesep=2mm, bgcolor=lightgray, linenos]{python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+# Setting up the visual style
+sns.set(style="whitegrid")
+
+# Distribution plots for numerical features
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+sns.histplot(penguins_df['bill_length_mm'].dropna(), ax=axes[0, 0], kde=True).set_title('Bill Length Distribution')
+sns.histplot(penguins_df['bill_depth_mm'].dropna(), ax=axes[0, 1], kde=True).set_title('Bill Depth Distribution')
+sns.histplot(penguins_df['flipper_length_mm'].dropna(), ax=axes[1, 0], kde=True).set_title('Flipper Length Distribution')
+sns.histplot(penguins_df['body_mass_g'].dropna(), ax=axes[1, 1], kde=True).set_title('Body Mass Distribution')
+
+plt.tight_layout()
+plt.show()
+
+# Pair plot for relationships between numerical features, colored by species
+sns.pairplot(penguins_df.dropna(), hue='species', diag_kind='hist')
+plt.suptitle('Pair Plot of Features', y=1.02)
+plt.show()
+
+# Count plots for categorical features
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+sns.countplot(x='species', data=penguins_df, ax=axes[0]).set_title('Species Count')
+sns.countplot(x='island', data=penguins_df, ax=axes[1]).set_title('Island Count')
+
+plt.tight_layout()
+plt.show()
+# Correlation matrix
+correlation_matrix = penguins_df.drop(["sex","species","island"],axis=1).corr()
+
+# Plotting the correlation matrix
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Correlation Matrix of Penguin Features')
+plt.show()
+
+\end{minted}
+\section*{outputs of the abouve code}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{pair.png}
+    \caption{distribuition on the basis of count of categories}
+    \label{fig:label}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{kde.png}
+    \caption{measuments graph with kernel density estimation}
+    \label{fig:label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{download.png}
+    \caption{pair plots}
+    \label{fig:label}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{corr.png}
+    \caption{pair plots}
+    \label{fig:label}
+\end{figure}
+\subsection*{Penguins characteristics }
+\begin{itemize}
+    \item Body Mass has a strong positive correlation with Flipper Length.
+    \item Weak correlations are observed between Bill Length and Bill Depth.
+\end{itemize}
+
+
+\begin{itemize}
+    \item \textbf{Gentoo Penguins:} These penguins tend to have the largest flipper lengths and body mass among penguin species. They are known for their speed in the water, reaching up to 22 mph (35 km/h), which is facilitated by their long flippers and streamlined bodies.
+    
+    \item \textbf{Adelie Penguins:} Adelie penguins have smaller physical measurements compared to other species. They are hardy birds that primarily inhabit the Antarctic continent, characterized by their tuxedo-like appearance with a white belly and black back.
+    
+    \item \textbf{Sexual Dimorphism:} Clear sexual dimorphism is observed in penguin species, where males are generally larger than females. For example, in \textbf{Adelie penguins}, males are about 10\% larger than females.
+\end{itemize}
+\subsection*{model to predict the class of the penguins}
+\section*{random forest to classify penguins}
+
+the Random Forest algorithm was used to predict the classes of penguin species based on various physical characteristics such as flipper length, body mass, and others. The steps involved in the process are as follows:
+
+\begin{itemize}
+    
+    \item \textbf{Model Training:} A Random Forest classifier was trained on the dataset. Random Forest is an ensemble learning algorithm that creates multiple decision trees and combines their outputs to improve classification accuracy. Each tree is built using a subset of the data, and the final prediction is determined by the majority vote of the trees.
+
+    \item \textbf{Prediction:} The trained Random Forest model was then used to predict the species of the penguins in the test dataset.
+\end{itemize}
+
+\section*{Confusion Matrix}
+
+The performance of the model was evaluated using a confusion matrix. The confusion matrix is a table used to evaluate the accuracy of a classification model, showing the number of true positives, false positives, true negatives, and false negatives. 
+
+
+    \includegraphics[width=0.5\textwidth]{confuse.png}  % Replace with the path to your image
+\section*{ part 2 data collection and exploration in the real world:}
+\href{https://colab.research.google.com/drive/1L_XTsoIVB7QVzclWriRlnPwsjELKFMlw?usp=sharing}{link of colab file}.
+\section*{Introduction}
+
+This report analyzes the relationship between delivery distance and delivery time for three food delivery applications: Domino's, Swiggy, and Zomato. The goal of the analysis is to understand how the delivery time changes with respect to the distance for each app and to develop a regression model that predicts the delivery time based on the distance.
+
+\section*{Dataset}
+this data is collected through a survey done by me(shashank yadav) from my hostelmates it contains the distance of college and the resturant , the time takken to reach the order, at which time the order has been placed,the app name.
+\href{https://drive.google.com/file/d/1cztFtHKCk420QXCxwn9kOzHQL-xQaZKM/view?usp=sharing}{link if the dataset}.
+
+\section*{Methodology}
+
+The following steps were taken to conduct the analysis:
+
+\subsection{Data Import and Exploration}
+The dataset was imported using the \texttt{pandas} library from a CSV file. The \texttt{df.info()} method was used to display basic information about the dataset, such as the number of rows, columns, and data types. The columns relevant to the analysis include:
+\begin{itemize}
+    \item \texttt{Distance\_km}: the distance the food travels in kilometers.
+    \item \texttt{Delivery\_Time\_min}: the time it takes for the delivery in minutes.
+    \item \texttt{App\_name}: the name of the food delivery service (Domino's, Swiggy, Zomato).
+\end{itemize}
+
+\subsection*{Data Segmentation}
+The dataset was divided into separate lists for each app based on the value in the \texttt{App\_name} column:
+\begin{itemize}
+    \item \texttt{domino\_dist}, \texttt{domino\_time}: Data for Domino’s.
+    \item \texttt{swiggy\_dist}, \texttt{swiggy\_time}: Data for Swiggy.
+    \item \texttt{zomato\_dist}, \texttt{zomato\_time}: Data for Zomato.
+\end{itemize}
+A loop was used to iterate over the dataset, categorizing the delivery distance and time into the appropriate lists for each app.
+
+\subsection*{Data Visualization}
+A scatter plot was generated using \texttt{matplotlib} to visually compare the relationship between distance and delivery time for the three platforms. Each platform’s data was represented using different markers (blue circles for Domino’s, red crosses for Zomato, and orange squares for Swiggy).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{correlation.png}
+    \caption{counts graph}
+    \label{fig:label}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{distribuition.png}
+    \caption{counts graph}
+    \label{fig:label}
+\end{figure}
+\subsection*{Linear Regression Model}
+A linear regression model was built using the \texttt{scikit-learn} library to predict delivery time based on the distance for the entire dataset. The model was trained using \texttt{Distance\_km} as the predictor variable (X) and \texttt{Delivery\_Time\_min} as the target variable (y). The model's equation was obtained, which describes the relationship between the delivery distance and time:
+\[
+y = \text{3.47} \cdot x + \text{22.88}
+\]
+The slope and intercept were extracted from the trained model and displayed.
+the bues one's are domino the red ones are zomato the yellow one's are swiggy
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{linear.png}
+    \caption{counts graph}
+    \label{fig:label}
+\end{figure}
+\subsection*{Results}
+The model was evaluated by printing the regression equation, which helps understand how delivery time increases with distance. Delivery times for each app were also displayed for further comparison.
+
+\section*{Results}
+
+\subsection*{Scatter Plot}
+The scatter plot illustrated the relationship between distance and delivery time for each app. Each platform’s data had its own distinct trend.
+
+\subsection*{Linear Regression Equation}
+The regression equation that best fits the relationship between delivery distance and time was calculated as follows:
+\[
+y = \text{3.47} \cdot x + \text{22.88}
+\]
+The specific values for slope and intercept depend on the dataset provided and are printed by the code.
+
+\subsection*{Delivery Times}
+The mean time taken by each platform for deliveries was printed separately, allowing for comparison of the performance of each app:
+\begin{itemize}
+    \item Domino’s: 36.172413793103445 min
+    \item Swiggy: 51.9 min
+    \item Zomato: 42.73684210526316 min
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{app.png}
+    \caption{counts graph}
+    \label{fig:label}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{time.png}
+    \caption{counts graph}
+    \label{fig:label}
+\end{figure}
+\section*{Conclusion}
+
+This analysis provides insights into how delivery time correlates with distance for different food delivery services.
+as we can see domino takes the least time to deliver whereas swiggy take the most time.
+The regression model offers a statistical approach to predict delivery times based on distance. The results of the analysis can be useful for further improvements in delivery efficiency and time management strategies for each platform.
+
+
+
+
+\end{document}
